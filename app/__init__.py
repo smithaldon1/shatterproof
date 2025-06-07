@@ -38,9 +38,13 @@ def create_app():
 def register_blueprints(app):
     from app.about import about_bp
     from app.main import main_bp
+    from app.auth import auth_bp
+    from app.admin import admin_bp
 
     app.register_blueprint(about_bp, url_prefix='/about')
     app.register_blueprint(main_bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(admin_bp, url_prefix='/admin')
 
 
 def initialize_extensions(app):
