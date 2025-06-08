@@ -1,1 +1,12 @@
 /* Add style as you like. */
+.top-banner {
+    background-color: #000;
+    color: white;
+}
+.navbar-brand {
+    color: white;
+    font-size: 38px;
+}
+.navbar {
+    background-color: #1b1b1b;
+}

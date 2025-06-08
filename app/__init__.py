@@ -1,6 +1,6 @@
 import os
 import logging
-from flask import Flask, render_template
+from flask import Flask
 from flask.logging import default_handler
 from flask_sqlalchemy import SQLAlchemy
 from logging.handlers import RotatingFileHandler
@@ -43,7 +43,7 @@ def register_blueprints(app):
 
     app.register_blueprint(about_bp, url_prefix='/about')
     app.register_blueprint(main_bp)
-    app.register_blueprint(auth_bp)
+    app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
 
