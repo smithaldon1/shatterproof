@@ -18,28 +18,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3">
+                        <form class="row g-3" action="/admin/create" method="POST">
                             <div class="col-md-6">
                                 <label for="venue" class="form-label">Venue</label>
-                                <input type="text" class="form-control" id="venue" placeholder="Venue">
+                                <input type="text" class="form-control" name="venue" id="venue" placeholder="Venue">
                             </div>
                             <div class="col-md-6">
                                 <label for="citystate" class="form-label">City</label>
-                                <input type="text" class="form-control" id="citystate" placeholder="City, State">
+                                <input type="text" class="form-control" name="citystate" id="citystate" placeholder="City, State">
                             </div>
                             <div class="col-md">
                                 <label for="datetime" class="form-label">Date and Time</label>
-                                <input type="text" class="form-control" id="datetime" placeholder="June 1st, 2025 8:00PM">
+                                <input type="text" class="form-control" name="datetime" id="datetime" placeholder="June 1st, 2025 8:00PM">
                             </div>
                             <div class="col-md">
                                 <label for="facebook" class="form-label">Facebook Link</label>
-                                <input type="text" class="form-control" id="facebook" placeholder="https://facebook.com/">
+                                <input type="text" class="form-control" name="facebook" id="facebook" placeholder="https://facebook.com/">
                             </div>
+                            <hr>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -50,13 +48,16 @@
             <hr>
             <div class="container">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-1">
+                        <h6>{{ event.id }}</h6>
+                    </div>
+                    <div class="col text-start">
                         <h6>{{ event.venue }}</h6>
-                        <h6>{{ event.citystate }}</h6>
-                        <h6>{{ event.datetime }}</h6>
+                        <h6>{{ event.city }}</h6>
+                        <h6>{{ event.date }}</h6>
                     </div>
                     <div class="col text-center">
-                        <a href="{{ event.link }}" target="_blank" class="text-decoration-none">Facebook Link</a>
+                        <a href="{{ event.facebooklink }}" target="_blank" class="text-decoration-none">Facebook Link</a>
                     </div>
                     <div class="col text-end">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-modal">Update</button>
@@ -72,28 +73,26 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="row g-3">
+                            <form class="row g-3" action="/admin/update/{{ event.id }}" method="POST">
                                 <div class="col-md-6">
                                     <label for="venue" class="form-label">Venue</label>
-                                    <input type="text" class="form-control" id="venue" placeholder="{{ event.venue }}">
+                                    <input type="text" class="form-control" name="updateVenue" id="updateVenue" value="{{ event.venue }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="citystate" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="citystate" placeholder="{{ event.citystate }}">
+                                    <input type="text" class="form-control" name="updateCity" id="updateCity" value="{{ event.city }}">
                                 </div>
                                 <div class="col-md">
                                     <label for="datetime" class="form-label">Date and Time</label>
-                                    <input type="text" class="form-control" id="datetime" placeholder="{{ event.datetime }}">
+                                    <input type="text" class="form-control" name="updateDate" id="updateDate" value="{{ event.date }}">
                                 </div>
                                 <div class="col-md">
                                     <label for="facebook" class="form-label">Facebook Link</label>
-                                    <input type="text" class="form-control" id="facebook" placeholder="{{ event.link }}">
+                                    <input type="text" class="form-control" name="updateFacebook" id="updateFacebook" value="{{ event.facebooklink }}">
                                 </div>
+                                <hr>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -101,17 +100,19 @@
             <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="deleteModal">Delete Confirmation</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <h5>Are you sure you want to delete this event?</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </div>
+                        <form action="/admin/delete/{{ event.id }}" method="POST">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteModal">Delete Confirmation</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body my-5 text-center">
+                                <h5>Are you sure you want to delete this event?</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
