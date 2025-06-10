@@ -5,15 +5,17 @@ from app import db
 class User(UserMixin, db.Model):
     __tablename__ = "adminusers"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    email = db.Column(db.String(250), unique=True, nullable=False)
     username = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
 
-    def __init__(self, username, password):
+    def __init__(self, email, username, password):
+        self.email = email
         self.username = username
         self.password = password
 
     def __repr__(self):
-        return f"User(id={self.id}, username={self.username}, password={self.password})"
+        return f"User(email={self.email}, username={self.username}, password={self.password})"
 
 class Event(db.Model):
     __tablename__ = "events"

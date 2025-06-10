@@ -1,1 +1,4 @@
 /* Add style as you like. */
+#top-img {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))
+}

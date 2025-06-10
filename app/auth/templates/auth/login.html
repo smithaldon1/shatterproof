@@ -5,21 +5,28 @@
 {% endblock %}
 
 {% block main %}
-  <div class="container-md my-4">
-    <div class="card p-2">
-        <div class="card-body">
-            <form>
-                <div class="mb-4">
-                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1">
+  <div class="container-md m-5">
+    <div class="container">
+      <div class="card p-2">
+          <div class="card-body">
+              <form action="/auth/login" method="POST">
+                <div class="container">
+                  <div class="mb-4">
+                      <label for="username" class="form-label">Username</label>
+                      <input type="text" class="form-control" name="username" id="username">
+                  </div>
+                  <div class="mb-4">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" name="password" id="password">
+                  </div>
+                  <div class="container text-center">
+                    <a type="button" class="btn btn-link px-5 py-2" href="{{ url_for('auth.show_signup')}}">Go to Sign Up Page</a>
+                    <button type="submit" class="btn btn-primary px-5 py-2">Login</button>
+                  </div>
                 </div>
-                <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-        </div>
+              </form>
+          </div>
+      </div>
     </div>
   </div>
 {% endblock %}

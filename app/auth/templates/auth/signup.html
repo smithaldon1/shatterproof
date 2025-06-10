@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login-index.css') }}">
+{% endblock %}
+
+{% block main %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="alert alert-danger text-center" role="alert">
+        {{ messages[0] }}, Go to <a href="{{ url_for('auth.show_index')}}">login page</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endif %}
+{% endwith %}
+    <div class="container-md m-5">
+        <div class="card p-2">
+            <div class="card-body">
+                <form action="/auth/signup" method="POST">
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email">
+                    </div>
+                    <div class="mb-4">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" id="username">
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <div class="container text-center">
+                        <a type="button" class="btn btn-link px-5 py-2" href="{{ url_for('auth.show_index')}}">Go to Login Page</a>
+                        <button type="submit" class="btn btn-primary px-5 py-2">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
