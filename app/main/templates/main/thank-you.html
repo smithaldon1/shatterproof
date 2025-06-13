@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block css %}{% endblock %}
+
+{% block banner %}
+<div class="container-fluid top-banner text-center">
+  {{ event.date.strftime('%B %d, %Y  %I:%M %p') }} {{event.venue }} {{ event.city }}
+</div>
+{% endblock %}
+
+{% block main %}{% endblock %}
+
+{% block js %}{% endblock %}

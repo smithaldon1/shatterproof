@@ -1,5 +1,5 @@
 from . import admin_bp
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect
 from app.models import Event
 from datetime import datetime as dt
 from app import db

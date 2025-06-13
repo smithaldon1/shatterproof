@@ -4,41 +4,109 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main-index.css') }}">
 {% endblock %}
 
+{% block banner %}
+<div class="container-fluid top-banner text-center">
+  {{ event.date.strftime('%B %d, %Y  %I:%M %p') }} {{event.venue }} {{ event.city }}
+</div>
+{% endblock %}
+
 {% block main %}
 <img src="{{ url_for('static', filename='img/shatterproof-band.png')}}" class="img-fluid" id="top-img">
-<div class="container newsletter py-4 mt-5">
-  <div class="row">
-    <div class="col-md-8 offset-md-2 text-center">
+<div class="container-fluid newsletter py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
       <h3>SIGN UP FOR ALL SHATTERPROOF UPDATES</h3>
     </div>
   </div>
-  <div class="row mt-5">
-    <div class="col-md-4 offset-md-4 text-center">
+  <div class="row mt-5 justify-content-center">
+    <div class="col-4 text-center">
       <h6>Sign up to be one of the first to know about presales, VIP, merch, and more!</h6>
     </div>
   </div>
-  <div class="row mt-2 text-center justify-content-center">
-    <div class="col-md-3 text-center">
-      <input class="form-control" type="email" name="email" id="newsletter-email" placeholder="Email">
+  <div class="row mt-2 text-center justify-content-center mb-5">
+    <div class="col-md-3">
+      <form action="/subscribe" method="POST">
+        <input class="form-control" type="email" name="email" id="newsletter-email" placeholder="Email">
+        <button class="btn btn-light mt-4 px-4 py-2">Continue</button>
+      </form>
     </div>
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-light">Submit</button>
+  </div>
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-3">
+      <small id="terms">By submitting your email, you agree to the <a class="link" href="{{ url_for('main.show_privacy_policy')}}">Privacy Policy</a> and the <a class="link" href="{{ url_for('main.show_terms')}}">Terms & Conditions</a>.</small>
     </div>
   </div>
 </div>
 <div class="booking container-fluid">
-  <div class="row justify-content-end">
-    <div class="col-2 offset-md-2 text-end">
+  <div class="row justify-content-end align-items-center">
+    <div class="col-6 text-end">
       <h2>BOOK</h2>
       <h2>SHATTERPROOF</h2>
       <h2>TODAY</h2>
+      <p class="my-4">Book SHATTERPROOF for your event today!</p>
+      <a href="mailto:theshatterproofband@gmail.com" class="btn btn-light booking-btn px-4 py-2">BOOK NOW</a>
     </div>
-    <div class="col-6 offset-md-2">
+    <div class="col-6">
       <img src="{{ url_for('static', filename='img/shatterproof-setup.png')}}" class="img-fluid">
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container-fluid events py-5">
+  <div class="row">
+    <div class="col text-center">
+      <h6>SHOWS</h6>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h3>GET UPDATES ON NEW SHOWS, NEW MUSIC, AND MORE</h3>
+    </div>
+  </div>
+  <div class="row mt-2 mb-5">
+    <div class="col text-center">
+      <a href="https://www.facebook.com/profile.php?id=100091307400177" class="btn btn-dark px-5 py-3 dark" target="_blank">FOLLOW</a>
+    </div>
+  </div>
+  {% for show in shows %} 
+    <div class="row mt-2 px-4">
+      <div class="container">
+        <hr>
+      </div>
+      <div class="col">
+        <h6>{{ show.date.strftime('%B %d, %Y %I:%M %p') }}</h6>
+        <p>{{ show.venue }}</p>
+      </div>
+      <div class="col text-center">
+        <h6>{{ show.city }}</h6>
+      </div>
+      <div class="col text-end">
+        <a href="{{ show.facebooklink }}" target="_blank" class="text-decoration-none me-3">
+          <img src="{{url_for('static', filename='img/facebook-brands-white.png')}}" height="40px">
+        </a>
+        <a class="btn btn-dark px-5 py-3 dark" href="#">Directions</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+<div class="container-fluid icon-section py-5 d-none">
+  <div class="row py-5 px-5 align-items-center">
+    <div class="col text-end">
+      <a href="" target="_blank" class="text-decoration-none">
+        <img src="{{ url_for('static', filename='img/apple-circle.svg')}}" height="227px">
+      </a>
+    </div>
+    <div class="col text-center">
+      <a href="" target="_blank" class="text-decoration-none">
+        <img src="{{ url_for('static', filename='img/spotify-brands.svg')}}" height="223px">
+      </a>
+    </div>
+    <div class="col">
+      <a href="" target="_blank" class="text-decoration-none">
+        <img src="{{ url_for('static', filename='img/youtube-brands.svg')}}" height="178px">
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block js %}

@@ -23,18 +23,27 @@
 <body>
   <!-- Header / Navbar Section -->
   <header>
-    <div class="container-fluid top-banner text-center">
-      aj;dlkf
-    </div>
+    {% block banner %}{% endblock %}
     <nav class="navbar">
       <div class="container-fluid">
         <a class="navbar-brand mx-auto" href="{{ url_for('main.show_index') }}">SHATTERPROOF</a>
+        <div class="d-flex">
+          <a href="" class="me-4">
+            <img src="{{ url_for('static', filename='img/facebook-brands-white.png')}}" height="30">
+          </a>
+          <a href="" class="me-4">
+            <img src="{{ url_for('static', filename='img/instagram-brands-white.svg')}}" height="30">
+          </a>
+          <a href="">
+            <img src="{{ url_for('static', filename='img/youtube-brands-white.svg')}}" height="30">
+          </a>
+        </div>
       </div>
     </nav>
   </header>
 
   <!-- Main Section -->
-  <main role="main" class="pb-5" style="min-height: 80vh;">
+  <main role="main" style="min-height: 80vh;">
     {% block main %}{% endblock %}
   </main>
 
